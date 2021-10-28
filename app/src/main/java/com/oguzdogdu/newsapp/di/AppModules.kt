@@ -1,6 +1,7 @@
 package com.oguzdogdu.newsapp.di
 
 import com.oguzdogdu.newsapp.di.Constants.BASE_URL
+import com.oguzdogdu.newsapp.repo.NewsRepository
 import com.oguzdogdu.newsapp.service.NewsInterface
 import dagger.Module
 import dagger.Provides
@@ -22,5 +23,11 @@ object AppModules {
             .addConverterFactory(GsonConverterFactory.create()).build()
             .create(NewsInterface::class.java)
 
+    }
+
+    @Singleton
+    @Provides
+    fun provideRepository(newsInterface: NewsInterface):NewsRepository{
+        return NewsRepository(newsInterface)
     }
 }
