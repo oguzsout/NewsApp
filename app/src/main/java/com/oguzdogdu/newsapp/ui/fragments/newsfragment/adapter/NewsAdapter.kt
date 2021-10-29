@@ -1,16 +1,19 @@
-package com.oguzdogdu.newsapp.adapter
+package com.oguzdogdu.newsapp.ui.fragments.newsfragment.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.oguzdogdu.newsapp.databinding.ListItemBinding
 import com.oguzdogdu.newsapp.model.Article
+import com.oguzdogdu.newsapp.ui.fragments.newsfragment.NewsFragmentDirections
 
 class NewsAdapter : RecyclerView.Adapter<NewsAdapter.NewsHolder>() {
     class NewsHolder(val binding: ListItemBinding) : RecyclerView.ViewHolder(binding.root)
+
 
     private val diffUtil = object : DiffUtil.ItemCallback<Article>() {
         override fun areItemsTheSame(oldItem: Article, newItem: Article): Boolean {
@@ -49,6 +52,10 @@ class NewsAdapter : RecyclerView.Adapter<NewsAdapter.NewsHolder>() {
                 crossfade(true)
                 crossfade(1000)
             }
+        }
+        holder.binding.root.setOnClickListener {
+            val action = NewsFragmentDirections.actionNewsFragmentToDetailFragment(newsList)
+            Navigation.findNavController(it).navigate(action)
         }
     }
 

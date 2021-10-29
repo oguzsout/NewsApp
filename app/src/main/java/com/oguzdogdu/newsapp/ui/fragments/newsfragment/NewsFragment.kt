@@ -1,4 +1,4 @@
-package com.oguzdogdu.newsapp.ui.fragments
+package com.oguzdogdu.newsapp.ui.fragments.newsfragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.oguzdogdu.newsapp.R
-import com.oguzdogdu.newsapp.adapter.NewsAdapter
+import com.oguzdogdu.newsapp.ui.fragments.newsfragment.adapter.NewsAdapter
 import com.oguzdogdu.newsapp.databinding.FragmentNewsBinding
 import com.oguzdogdu.newsapp.viewmodel.NewsViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -43,9 +43,15 @@ class NewsFragment : Fragment(R.layout.fragment_news) {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = newsAdapter
             setHasFixedSize(true)
+
+            viewModel.newsResponse.observe(viewLifecycleOwner, {
+                newsAdapter.news = it.articles
+            })
         }
-        viewModel.newsResponse.observe(viewLifecycleOwner, {
-            newsAdapter.news = it.articles
-        })
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

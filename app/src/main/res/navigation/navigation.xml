@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/newsFragment"
-        android:name="com.oguzdogdu.newsapp.ui.fragments.NewsFragment"
+        android:name="com.oguzdogdu.newsapp.ui.fragments.newsfragment.NewsFragment"
         android:label="fragment_news"
         tools:layout="@layout/fragment_news" >
         <action
@@ -16,7 +16,13 @@
     </fragment>
     <fragment
         android:id="@+id/detailFragment"
-        android:name="com.oguzdogdu.newsapp.ui.fragments.DetailFragment"
+        android:name="com.oguzdogdu.newsapp.ui.fragments.detailfragments.DetailFragment"
         android:label="fragment_detail"
-        tools:layout="@layout/fragment_detail" />
+        tools:layout="@layout/fragment_detail" >
+        <argument
+            android:name="newsArgs"
+            app:argType="com.oguzdogdu.newsapp.model.Article"
+            app:nullable="true"
+            android:defaultValue="@null" />
+    </fragment>
 </navigation>
