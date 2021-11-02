@@ -26,9 +26,10 @@ class NewsViewModel @Inject constructor(private val repository: NewsRepository) 
 
     private fun getBreakingNews() {
         viewModelScope.launch(Dispatchers.IO) {
+            val client = repository.getNews("tr", "general")
             try {
-                val client = repository.getNews("tr", "technology", 1)
                 _response.postValue(Resource.Success(client.body()).data)
+
             } catch (e: Exception) {
 
             }

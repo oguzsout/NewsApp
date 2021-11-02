@@ -1,12 +1,13 @@
-package com.oguzdogdu.newsapp.ui.fragments.detailfragments
+package com.oguzdogdu.newsapp.ui.fragments.detailfragment
 
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import coil.load
 import coil.transform.RoundedCornersTransformation
@@ -20,7 +21,7 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
     private var _binding: FragmentDetailBinding? = null
     private val binding get() = _binding!!
 
-    private val args :  DetailFragmentArgs by navArgs()
+    private val args: DetailFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,6 +34,9 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
+        backStack()
+
         val news = args.newsArgs
 
         if (news != null) {
@@ -42,9 +46,6 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
             binding.description.text = news.description
         }
         if (news != null) {
-            binding.content.text = news.content
-        }
-        if (news != null) {
             binding.imageListItem.load(news.urlToImage) {
                 crossfade(true)
                 crossfade(1000)
@@ -52,13 +53,29 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
             }
         }
         binding.linkButton.setOnClickListener {
-            val openURL = Intent(Intent.ACTION_VIEW)
-            if (news != null) {
-                openURL.data = Uri.parse(news.url)
+            val action = news?.let { it1 ->
+                DetailFragmentDirections.actionDetailFragmentToWebViewFragment(
+                    it1
+                )
             }
-            startActivity(openURL)
+            if (action != null) {
+                Navigation.findNavController(it).navigate(action)
+            }
         }
+
     }
+
+    private fun backStack() {
+        val callBack = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                findNavController().popBackStack()
+            }
+        }
+
+        requireActivity().onBackPressedDispatcher.addCallback(callBack)
+    }
+
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

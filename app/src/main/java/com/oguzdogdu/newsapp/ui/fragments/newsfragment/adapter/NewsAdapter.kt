@@ -51,6 +51,7 @@ class NewsAdapter : RecyclerView.Adapter<NewsAdapter.NewsHolder>() {
             imageListItem.load(newsList.urlToImage) {
                 crossfade(true)
                 crossfade(1000)
+                tvPublish.text = newsList.publishedAt
             }
         }
         holder.binding.root.setOnClickListener {

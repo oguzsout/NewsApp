@@ -7,7 +7,6 @@ class NewsRepository @Inject constructor(private val newsInterface: NewsInterfac
     suspend fun getNews(
         country: String,
         category: String,
-        pageNumber: Int
-    ) = newsInterface.getAllNews(country, category, pageNumber)
+    ) = newsInterface.getAllNews(country, category)
 
 }
