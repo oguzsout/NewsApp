@@ -26,20 +26,10 @@
             android:id="@+id/text_view_list_item"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/landasansmedium"
+            android:fontFamily="@font/product_sans_bold"
             android:padding="8dp"
             android:textColor="@color/black"
-            android:textSize="24sp">
-
-        </TextView>
-        <TextView
-            android:id="@+id/tv_publish"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/landasansmedium"
-            android:padding="8dp"
-            android:textColor="@color/black"
-            android:textSize="16sp">
+            android:textSize="20sp">
 
         </TextView>
     </LinearLayout>

@@ -10,15 +10,15 @@ import com.oguzdogdu.newsapp.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import retrofit2.Response
 import javax.inject.Inject
 
 @HiltViewModel
 class NewsViewModel @Inject constructor(private val repository: NewsRepository) : ViewModel() {
 
-    private val _response = MutableLiveData<NewsResponse>()
-    val newsResponse: LiveData<NewsResponse>
+    private val _response = MutableLiveData<Resource<NewsResponse>>()
+    val newsResponse: LiveData<Resource<NewsResponse>>
         get() = _response
-
 
     init {
         getBreakingNews()
@@ -26,15 +26,21 @@ class NewsViewModel @Inject constructor(private val repository: NewsRepository) 
 
     private fun getBreakingNews() {
         viewModelScope.launch(Dispatchers.IO) {
-            val client = repository.getNews("tr", "general")
-            try {
-                _response.postValue(Resource.Success(client.body()).data)
-
-            } catch (e: Exception) {
-
-            }
+            val response = repository.getNews("tr", "general")
+            _response.postValue(handleBreakingNewsResponse(response))
         }
     }
 }
+
+private fun handleBreakingNewsResponse(response: Response<NewsResponse>): Resource<NewsResponse> {
+    if (response.isSuccessful) {
+        response.body()?.let { resultResponse ->
+            return Resource.Success(resultResponse)
+        }
+    }
+    return Resource.Error(response.message())
+}
+
+
 
 

@@ -2,7 +2,7 @@ package com.oguzdogdu.newsapp.ui.fragments.newsfragment.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.navigation.Navigation
+import androidx.navigation.Navigation.findNavController
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -51,12 +51,11 @@ class NewsAdapter : RecyclerView.Adapter<NewsAdapter.NewsHolder>() {
             imageListItem.load(newsList.urlToImage) {
                 crossfade(true)
                 crossfade(1000)
-                tvPublish.text = newsList.publishedAt
             }
         }
         holder.binding.root.setOnClickListener {
             val action = NewsFragmentDirections.actionNewsFragmentToDetailFragment(newsList)
-            Navigation.findNavController(it).navigate(action)
+            findNavController(it).navigate(action)
         }
     }
 

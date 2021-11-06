@@ -46,6 +46,9 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
             binding.description.text = news.description
         }
         if (news != null) {
+            binding.publish.text = news.publishedAt
+        }
+        if (news != null) {
             binding.imageListItem.load(news.urlToImage) {
                 crossfade(true)
                 crossfade(1000)
@@ -53,9 +56,9 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
             }
         }
         binding.linkButton.setOnClickListener {
-            val action = news?.let { it1 ->
+            val action = news?.let { web ->
                 DetailFragmentDirections.actionDetailFragmentToWebViewFragment(
-                    it1
+                    web
                 )
             }
             if (action != null) {

@@ -2,6 +2,7 @@ package com.oguzdogdu.newsapp.ui.fragments.newsfragment
 
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.oguzdogdu.newsapp.R
 import com.oguzdogdu.newsapp.databinding.FragmentNewsBinding
 import com.oguzdogdu.newsapp.ui.fragments.newsfragment.adapter.NewsAdapter
+import com.oguzdogdu.newsapp.util.Resource
 import com.oguzdogdu.newsapp.viewmodel.NewsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -45,15 +47,32 @@ class NewsFragment : Fragment(R.layout.fragment_news) {
     private fun setUpRv() {
         newsAdapter = NewsAdapter()
         binding.recyclerView.apply {
-            layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+            layoutManager = StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL)
             adapter = newsAdapter
             setHasFixedSize(true)
         }
     }
 
     private fun observeData() {
-        viewModel.newsResponse.observe(viewLifecycleOwner, {
-            newsAdapter.news = it.articles
+        viewModel.newsResponse.observe(viewLifecycleOwner, { response ->
+            newsAdapter.news = response.data?.articles!!
+            when(response) {
+                is Resource.Success -> {
+                    hideProgressBar()
+                    response.data.let { newsResponse ->
+                        newsAdapter.news = newsResponse.articles
+                    }
+                }
+                is Resource.Error -> {
+                    hideProgressBar()
+                    response.message?.let { message ->
+                        Log.e("TAG", "An error occured: $message")
+                    }
+                }
+                is Resource.Loading -> {
+                    showProgressBar()
+                }
+            }
         })
     }
 
@@ -71,6 +90,14 @@ class NewsFragment : Fragment(R.layout.fragment_news) {
             Toast.makeText(requireContext(), "Refresh From API", Toast.LENGTH_SHORT).show()
             binding.swipeContainer.isRefreshing = false
         }
+    }
+
+    private fun hideProgressBar() {
+        binding.paginationProgressBar.visibility = View.INVISIBLE
+    }
+
+    private fun showProgressBar() {
+        binding.paginationProgressBar.visibility = View.VISIBLE
     }
 
     override fun onDestroyView() {
