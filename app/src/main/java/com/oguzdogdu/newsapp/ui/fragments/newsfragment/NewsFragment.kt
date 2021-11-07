@@ -47,7 +47,7 @@ class NewsFragment : Fragment(R.layout.fragment_news) {
     private fun setUpRv() {
         newsAdapter = NewsAdapter()
         binding.recyclerView.apply {
-            layoutManager = StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL)
+            layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
             adapter = newsAdapter
             setHasFixedSize(true)
         }
@@ -56,7 +56,7 @@ class NewsFragment : Fragment(R.layout.fragment_news) {
     private fun observeData() {
         viewModel.newsResponse.observe(viewLifecycleOwner, { response ->
             newsAdapter.news = response.data?.articles!!
-            when(response) {
+            when (response) {
                 is Resource.Success -> {
                     hideProgressBar()
                     response.data.let { newsResponse ->
@@ -86,7 +86,7 @@ class NewsFragment : Fragment(R.layout.fragment_news) {
         binding.swipeContainer.setColorSchemeColors(Color.RED)
 
         binding.swipeContainer.setOnRefreshListener {
-            observeData()
+            newsAdapter.news
             Toast.makeText(requireContext(), "Refresh From API", Toast.LENGTH_SHORT).show()
             binding.swipeContainer.isRefreshing = false
         }
