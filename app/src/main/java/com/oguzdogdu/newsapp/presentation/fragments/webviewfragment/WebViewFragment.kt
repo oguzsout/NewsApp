@@ -1,4 +1,4 @@
-package com.oguzdogdu.newsapp.ui.fragments.webviewfragment
+package com.oguzdogdu.newsapp.presentation.fragments.webviewfragment
 
 import android.os.Bundle
 import android.view.LayoutInflater

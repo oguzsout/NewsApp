@@ -1,9 +1,10 @@
-package com.oguzdogdu.newsapp.di
+package com.oguzdogdu.newsapp.data.dependencyinjection
 
 import com.oguzdogdu.newsapp.util.Constants.BASE_URL
-import com.oguzdogdu.newsapp.repo.NewsRepository
-import com.oguzdogdu.newsapp.service.NewsInterface
-import com.oguzdogdu.newsapp.ui.fragments.newsfragment.adapter.NewsAdapter
+import com.oguzdogdu.newsapp.domain.repository.NewsRepository
+import com.oguzdogdu.newsapp.data.repository.NewsRepositoryImpl
+import com.oguzdogdu.newsapp.data.remote.NewsInterface
+import com.oguzdogdu.newsapp.presentation.fragments.newsfragment.adapter.NewsAdapter
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -28,7 +29,7 @@ object AppModules {
     @Singleton
     @Provides
     fun provideRepository(newsInterface: NewsInterface): NewsRepository {
-        return NewsRepository(newsInterface)
+        return NewsRepositoryImpl(newsInterface)
     }
 
     @Singleton

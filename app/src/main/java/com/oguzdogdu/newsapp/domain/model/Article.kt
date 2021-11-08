@@ -1,4 +1,4 @@
-package com.oguzdogdu.newsapp.model
+package com.oguzdogdu.newsapp.domain.model
 
 import android.os.Parcelable
 

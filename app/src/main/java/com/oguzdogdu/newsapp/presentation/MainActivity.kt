@@ -1,4 +1,4 @@
-package com.oguzdogdu.newsapp.ui
+package com.oguzdogdu.newsapp.presentation
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

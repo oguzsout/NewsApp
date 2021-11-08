@@ -1,7 +1,7 @@
-package com.oguzdogdu.newsapp.service
+package com.oguzdogdu.newsapp.data.remote
 
 import com.oguzdogdu.newsapp.util.Constants.API_KEY
-import com.oguzdogdu.newsapp.model.NewsResponse
+import com.oguzdogdu.newsapp.domain.model.NewsResponse
 import com.oguzdogdu.newsapp.util.Constants.SORT_BY
 import retrofit2.Response
 import retrofit2.http.GET

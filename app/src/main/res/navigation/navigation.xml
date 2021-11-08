@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/newsFragment"
-        android:name="com.oguzdogdu.newsapp.ui.fragments.newsfragment.NewsFragment"
+        android:name="com.oguzdogdu.newsapp.presentation.fragments.newsfragment.NewsFragment"
         android:label="fragment_news"
         tools:layout="@layout/fragment_news">
         <action
@@ -20,13 +20,13 @@
     </fragment>
     <fragment
         android:id="@+id/detailFragment"
-        android:name="com.oguzdogdu.newsapp.ui.fragments.detailfragment.DetailFragment"
+        android:name="com.oguzdogdu.newsapp.presentation.fragments.detailfragment.DetailFragment"
         android:label="fragment_detail"
         tools:layout="@layout/fragment_detail">
         <argument
             android:name="newsArgs"
             android:defaultValue="@null"
-            app:argType="com.oguzdogdu.newsapp.model.Article"
+            app:argType="com.oguzdogdu.newsapp.domain.model.Article"
             app:nullable="true" />
         <action
             android:id="@+id/action_detailFragment_to_webViewFragment"
@@ -38,12 +38,12 @@
     </fragment>
     <fragment
         android:id="@+id/webViewFragment"
-        android:name="com.oguzdogdu.newsapp.ui.fragments.webviewfragment.WebViewFragment"
+        android:name="com.oguzdogdu.newsapp.presentation.fragments.webviewfragment.WebViewFragment"
         android:label="fragment_web_view"
         tools:layout="@layout/fragment_web_view">
         <argument
             android:name="webArgs"
-            app:argType="com.oguzdogdu.newsapp.model.Article" />
+            app:argType="com.oguzdogdu.newsapp.domain.model.Article" />
         <action
             android:id="@+id/action_webViewFragment_to_detailFragment"
             app:destination="@id/detailFragment"

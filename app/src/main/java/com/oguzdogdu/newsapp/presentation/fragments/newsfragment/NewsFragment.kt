@@ -1,4 +1,4 @@
-package com.oguzdogdu.newsapp.ui.fragments.newsfragment
+package com.oguzdogdu.newsapp.presentation.fragments.newsfragment
 
 import android.graphics.Color
 import android.os.Bundle
@@ -13,9 +13,8 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.oguzdogdu.newsapp.R
 import com.oguzdogdu.newsapp.databinding.FragmentNewsBinding
-import com.oguzdogdu.newsapp.ui.fragments.newsfragment.adapter.NewsAdapter
+import com.oguzdogdu.newsapp.presentation.fragments.newsfragment.adapter.NewsAdapter
 import com.oguzdogdu.newsapp.util.Resource
-import com.oguzdogdu.newsapp.viewmodel.NewsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 

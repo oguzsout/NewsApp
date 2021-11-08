@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/fragmentColor"
-    tools:context=".ui.fragments.newsfragment.NewsFragment">
+    tools:context=".presentation.fragments.newsfragment.NewsFragment">
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipeContainer"

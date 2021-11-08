@@ -1,4 +1,4 @@
-package com.oguzdogdu.newsapp.ui.fragments.newsfragment.adapter
+package com.oguzdogdu.newsapp.presentation.fragments.newsfragment.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -8,8 +8,8 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.oguzdogdu.newsapp.databinding.ListItemBinding
-import com.oguzdogdu.newsapp.model.Article
-import com.oguzdogdu.newsapp.ui.fragments.newsfragment.NewsFragmentDirections
+import com.oguzdogdu.newsapp.domain.model.Article
+import com.oguzdogdu.newsapp.presentation.fragments.newsfragment.NewsFragmentDirections
 
 class NewsAdapter: RecyclerView.Adapter<NewsAdapter.NewsHolder>() {
     class NewsHolder(val binding: ListItemBinding) : RecyclerView.ViewHolder(binding.root)

@@ -1,4 +1,4 @@
-package com.oguzdogdu.newsapp.ui.fragments.detailfragment
+package com.oguzdogdu.newsapp.presentation.fragments.detailfragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
