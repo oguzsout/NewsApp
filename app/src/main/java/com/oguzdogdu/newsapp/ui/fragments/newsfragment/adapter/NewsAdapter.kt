@@ -11,7 +11,7 @@ import com.oguzdogdu.newsapp.databinding.ListItemBinding
 import com.oguzdogdu.newsapp.model.Article
 import com.oguzdogdu.newsapp.ui.fragments.newsfragment.NewsFragmentDirections
 
-class NewsAdapter : RecyclerView.Adapter<NewsAdapter.NewsHolder>() {
+class NewsAdapter: RecyclerView.Adapter<NewsAdapter.NewsHolder>() {
     class NewsHolder(val binding: ListItemBinding) : RecyclerView.ViewHolder(binding.root)
 
 

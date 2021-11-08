@@ -17,6 +17,7 @@ import com.oguzdogdu.newsapp.ui.fragments.newsfragment.adapter.NewsAdapter
 import com.oguzdogdu.newsapp.util.Resource
 import com.oguzdogdu.newsapp.viewmodel.NewsViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class NewsFragment : Fragment(R.layout.fragment_news) {
@@ -24,8 +25,11 @@ class NewsFragment : Fragment(R.layout.fragment_news) {
     private var _binding: FragmentNewsBinding? = null
     private val binding get() = _binding!!
 
+    @Inject
+    lateinit var newsAdapter: NewsAdapter
+
     private val viewModel: NewsViewModel by viewModels()
-    private lateinit var newsAdapter: NewsAdapter
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,7 +49,6 @@ class NewsFragment : Fragment(R.layout.fragment_news) {
     }
 
     private fun setUpRv() {
-        newsAdapter = NewsAdapter()
         binding.recyclerView.apply {
             layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
             adapter = newsAdapter
