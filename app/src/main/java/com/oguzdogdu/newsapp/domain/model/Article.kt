@@ -1,8 +1,9 @@
 package com.oguzdogdu.newsapp.domain.model
 
 import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
 
-@kotlinx.parcelize.Parcelize
+@Parcelize
 data class Article(
     val author: String,
     val content: String,

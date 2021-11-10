@@ -10,7 +10,6 @@ import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import coil.load
-import coil.transform.RoundedCornersTransformation
 import com.oguzdogdu.newsapp.R
 import com.oguzdogdu.newsapp.databinding.FragmentDetailBinding
 
@@ -48,11 +47,8 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
             binding.publish.text = news.publishedAt
         }
         if (news != null) {
-            binding.imageListItem.load(news.urlToImage) {
-                crossfade(true)
-                crossfade(1000)
-                transformations(RoundedCornersTransformation(10f))
-            }
+            binding.imageListItem.load(news.urlToImage)
+
         }
         binding.linkButton.setOnClickListener {
             val action = news?.let { web ->
