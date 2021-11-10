@@ -7,11 +7,12 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import com.oguzdogdu.newsapp.R
 import com.oguzdogdu.newsapp.databinding.ListItemBinding
 import com.oguzdogdu.newsapp.domain.model.Article
 import com.oguzdogdu.newsapp.presentation.fragments.newsfragment.NewsFragmentDirections
 
-class NewsAdapter: RecyclerView.Adapter<NewsAdapter.NewsHolder>() {
+class NewsAdapter : RecyclerView.Adapter<NewsAdapter.NewsHolder>() {
     class NewsHolder(val binding: ListItemBinding) : RecyclerView.ViewHolder(binding.root)
 
 
@@ -47,6 +48,12 @@ class NewsAdapter: RecyclerView.Adapter<NewsAdapter.NewsHolder>() {
         val newsList = news[position]
 
         holder.binding.apply {
+            cardView.startAnimation(
+                android.view.animation.AnimationUtils.loadAnimation(
+                    holder.itemView.context,
+                    R.anim.rv_animation
+                )
+            )
             textViewListItem.text = newsList.title
             imageListItem.load(newsList.urlToImage) {
                 crossfade(true)
