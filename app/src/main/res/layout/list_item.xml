@@ -26,10 +26,10 @@
             android:id="@+id/text_view_list_item"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/product_sans_bold"
+            android:fontFamily="@font/product_sans_medium"
             android:padding="8dp"
             android:textColor="@color/black"
-            android:textSize="20sp">
+            android:textSize="16sp">
 
         </TextView>
     </LinearLayout>

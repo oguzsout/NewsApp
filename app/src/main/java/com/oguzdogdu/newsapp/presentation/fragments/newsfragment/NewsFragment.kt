@@ -11,7 +11,6 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.oguzdogdu.newsapp.R
 import com.oguzdogdu.newsapp.databinding.FragmentNewsBinding
 import com.oguzdogdu.newsapp.presentation.fragments.newsfragment.adapter.NewsAdapter
@@ -30,7 +29,6 @@ class NewsFragment : Fragment(R.layout.fragment_news) {
 
     private val viewModel: NewsViewModel by viewModels()
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -39,6 +37,7 @@ class NewsFragment : Fragment(R.layout.fragment_news) {
             inflater, container, false
         )
         return binding.root
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

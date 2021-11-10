@@ -39,10 +39,10 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
         val news = args.newsArgs
 
         if (news != null) {
-            binding.title.text = news.title
+            binding.description.text = news.description
         }
         if (news != null) {
-            binding.description.text = news.description
+            binding.content.text = news.content
         }
         if (news != null) {
             binding.publish.text = news.publishedAt
