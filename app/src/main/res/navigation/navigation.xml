@@ -20,6 +20,9 @@
         <action
             android:id="@+id/action_newsFragment_to_searchFragment"
             app:destination="@id/searchFragment" />
+        <action
+            android:id="@+id/action_newsFragment_to_searchFragment22"
+            app:destination="@id/searchFragment" />
     </fragment>
     <fragment
         android:id="@+id/detailFragment"
@@ -59,5 +62,9 @@
         android:id="@+id/searchFragment"
         android:name="com.oguzdogdu.newsapp.presentation.fragments.searchfragment.SearchFragment"
         android:label="fragment_search"
-        tools:layout="@layout/fragment_search" />
+        tools:layout="@layout/fragment_search" >
+        <action
+            android:id="@+id/action_searchFragment_to_newsFragment"
+            app:destination="@id/newsFragment" />
+    </fragment>
 </navigation>
