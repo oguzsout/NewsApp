@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import coil.transform.RoundedCornersTransformation
 import com.oguzdogdu.newsapp.R
 import com.oguzdogdu.newsapp.databinding.ListItemBinding
 import com.oguzdogdu.newsapp.domain.model.Article
@@ -56,6 +57,7 @@ class NewsAdapter : RecyclerView.Adapter<NewsAdapter.NewsHolder>() {
             )
             textViewListItem.text = newsList.title
             imageListItem.load(newsList.urlToImage) {
+                transformations(RoundedCornersTransformation(25f))
                 crossfade(true)
                 crossfade(1000)
             }

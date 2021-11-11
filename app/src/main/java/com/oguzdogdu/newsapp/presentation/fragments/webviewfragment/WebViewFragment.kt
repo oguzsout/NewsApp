@@ -10,8 +10,9 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.oguzdogdu.newsapp.databinding.FragmentWebViewBinding
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class WebViewFragment : Fragment() {
 
     private var _binding: FragmentWebViewBinding? = null

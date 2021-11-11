@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="image_di">180dp</dimen>
+    <dimen name="image_di">150dp</dimen>
+    <dimen name="item_image_width">150dp</dimen>
 </resources>

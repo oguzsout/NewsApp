@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/newsFragmentBottom"
+        android:icon="@drawable/home_bottom"
+        android:title="@string/home"
+        />
+
+    <item
+        android:id="@+id/searchFragmentBottom"
+        android:icon="@drawable/search_bottom"
+        android:title="@string/search" />
+</menu>
