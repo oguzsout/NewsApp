@@ -1,6 +1,5 @@
 package com.oguzdogdu.newsapp.presentation.fragments.webviewfragment
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -46,14 +45,13 @@ class WebViewFragment : Fragment() {
         requireActivity().onBackPressedDispatcher.addCallback(callBack)
     }
 
-    @SuppressLint("SetJavaScriptEnabled")
     private fun webViewSetup() {
         binding.webSiteView.webViewClient = WebViewClient()
 
         binding.webSiteView.apply {
-            settings.javaScriptEnabled = true
             settings.loadWithOverviewMode = true
             settings.useWideViewPort = true
+            settings.builtInZoomControls = true
             loadUrl(args.webArgs.url)
 
         }
