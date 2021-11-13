@@ -13,8 +13,15 @@ interface NewsInterface {
     suspend fun getAllNews(
         @Query("country") country: String,
         @Query("category") category: String,
-        @Query("pageSize") pageSize :Int = 50,
-        @Query("sortBy") sortBy : String = SORT_BY,
+        @Query("pageSize") pageSize: Int = 50,
+        @Query("sortBy") sortBy: String = SORT_BY,
+        @Query("apiKey") apiKey: String = API_KEY
+    ): Response<NewsResponse>
+
+    @GET("v2/everything")
+    suspend fun searchForNews(
+        @Query("q") searchQuery: String,
+        @Query("pageSize") pageSize: Int = 25,
         @Query("apiKey") apiKey: String = API_KEY
     ): Response<NewsResponse>
 }

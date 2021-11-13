@@ -22,4 +22,19 @@ class NewsRepositoryImpl @Inject constructor(private val newsInterface: NewsInte
             Resource.Error("No data!", null)
         }
     }
+
+    override suspend fun searchNews(searchQuery: String): Resource<NewsResponse> {
+        return try {
+            val response = newsInterface.searchForNews(searchQuery)
+            if (response.isSuccessful) {
+                response.body()?.let {
+                    return@let Resource.Success(it)
+                } ?: Resource.Error("Error", null)
+            } else {
+                Resource.Error("Error", null)
+            }
+        } catch (e: Exception) {
+            Resource.Error("No data!", null)
+        }
+    }
 }

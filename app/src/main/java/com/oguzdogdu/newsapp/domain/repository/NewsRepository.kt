@@ -6,4 +6,5 @@ import com.oguzdogdu.newsapp.util.Resource
 interface NewsRepository {
 
     suspend fun getNews(country: String, category: String): Resource<NewsResponse>
+    suspend fun searchNews(searchQuery: String): Resource<NewsResponse>
 }
