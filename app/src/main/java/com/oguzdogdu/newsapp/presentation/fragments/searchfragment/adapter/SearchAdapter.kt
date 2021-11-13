@@ -58,8 +58,6 @@ class SearchAdapter : RecyclerView.Adapter<SearchAdapter.SearchViewHolder>() {
             textViewListItem.text = newsList.title
             imageListItem.load(newsList.urlToImage) {
                 transformations(RoundedCornersTransformation(25f))
-                crossfade(true)
-                crossfade(1000)
             }
         }
         holder.binding.root.setOnClickListener {

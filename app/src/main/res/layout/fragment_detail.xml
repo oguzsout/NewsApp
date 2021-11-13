@@ -79,7 +79,7 @@
                 android:insetRight="10dp"
                 android:text="@string/more_read"
                 android:textAllCaps="true"
-                android:textColor="#000000"
+                android:textColor="#FFFFFF"
                 app:cornerRadius="10dp"
                 app:iconTintMode="add" />
         </LinearLayout>

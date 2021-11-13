@@ -52,7 +52,6 @@ class WebViewFragment : Fragment() {
         binding.webSiteView.apply {
             settings.loadWithOverviewMode = true
             settings.useWideViewPort = true
-            settings.builtInZoomControls = true
             loadUrl(args.webArgs.url)
 
         }

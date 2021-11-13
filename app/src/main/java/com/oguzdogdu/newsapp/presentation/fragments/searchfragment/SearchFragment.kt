@@ -54,12 +54,13 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
 
             override fun onQueryTextSubmit(query: String?): Boolean {
                 viewModel.searchNews(query!!)
+                showProgressBar()
                 binding.searchRv.visibility = View.VISIBLE
                 return false
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                return true
+                return false
             }
 
         })
@@ -67,7 +68,6 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
 
     private fun setUpRv() {
         binding.searchRv.apply {
-            visibility = View.GONE
             adapter = searchAdapter
             layoutManager = LinearLayoutManager(requireContext())
             setHasFixedSize(true)
