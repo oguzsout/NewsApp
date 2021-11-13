@@ -21,7 +21,7 @@ class SearchViewModel @Inject constructor(private val repository: NewsRepository
         get() = _response
 
 
-    private fun searchNews(searchQuery: String) {
+     fun searchNews(searchQuery: String) {
         viewModelScope.launch(Dispatchers.IO) {
             val result = repository.searchNews(searchQuery)
             _response.postValue(result)

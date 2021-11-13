@@ -13,13 +13,14 @@ import com.oguzdogdu.newsapp.databinding.ListItemBinding
 import com.oguzdogdu.newsapp.domain.model.Article
 import com.oguzdogdu.newsapp.presentation.fragments.newsfragment.NewsFragmentDirections
 
-class NewsAdapter : RecyclerView.Adapter<NewsAdapter.NewsHolder>() {
-    class NewsHolder(val binding: ListItemBinding) : RecyclerView.ViewHolder(binding.root)
+class NewsAdapter : RecyclerView.Adapter<NewsAdapter.NewsHolder>(){
+
+   inner class NewsHolder(val binding: ListItemBinding) : RecyclerView.ViewHolder(binding.root)
 
 
     private val diffUtil = object : DiffUtil.ItemCallback<Article>() {
         override fun areItemsTheSame(oldItem: Article, newItem: Article): Boolean {
-            return oldItem.url == newItem.url
+            return oldItem == newItem
         }
 
         override fun areContentsTheSame(oldItem: Article, newItem: Article): Boolean {

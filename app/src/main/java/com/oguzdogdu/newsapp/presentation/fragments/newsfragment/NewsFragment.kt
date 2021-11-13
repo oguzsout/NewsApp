@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.oguzdogdu.newsapp.R
 import com.oguzdogdu.newsapp.databinding.FragmentNewsBinding
@@ -45,6 +46,8 @@ class NewsFragment : Fragment(R.layout.fragment_news) {
         setUpRv()
         observeData()
         swipeRefreshData()
+
+
     }
 
     private fun setUpRv() {
@@ -56,18 +59,19 @@ class NewsFragment : Fragment(R.layout.fragment_news) {
     }
 
     private fun observeData() {
-        viewModel.newsResponse.observe(viewLifecycleOwner, { response ->
-            newsAdapter.news = response.data?.articles!!
-            when (response) {
+        viewModel.newsResponse.observe(viewLifecycleOwner, {
+            when (it) {
                 is Resource.Success -> {
                     hideProgressBar()
-                    response.data.let { newsResponse ->
-                        newsAdapter.news = newsResponse.articles
+                    it.data.let { newsResponse ->
+                        if (newsResponse != null) {
+                            newsAdapter.news = newsResponse.articles
+                        }
                     }
                 }
                 is Resource.Error -> {
                     hideProgressBar()
-                    response.message?.let { message ->
+                    it.message?.let { message ->
                         Log.e("TAG", "An error occured: $message")
                     }
                 }
@@ -95,11 +99,11 @@ class NewsFragment : Fragment(R.layout.fragment_news) {
     }
 
     private fun hideProgressBar() {
-        binding.paginationProgressBar.visibility = View.INVISIBLE
+        binding.progressBar.visibility = View.INVISIBLE
     }
 
     private fun showProgressBar() {
-        binding.paginationProgressBar.visibility = View.VISIBLE
+        binding.progressBar.visibility = View.VISIBLE
     }
 
     override fun onDestroyView() {

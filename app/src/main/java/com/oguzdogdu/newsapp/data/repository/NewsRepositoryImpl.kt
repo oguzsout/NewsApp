@@ -1,7 +1,7 @@
 package com.oguzdogdu.newsapp.data.repository
 
-import com.oguzdogdu.newsapp.domain.model.NewsResponse
 import com.oguzdogdu.newsapp.data.remote.NewsInterface
+import com.oguzdogdu.newsapp.domain.model.NewsResponse
 import com.oguzdogdu.newsapp.domain.repository.NewsRepository
 import com.oguzdogdu.newsapp.util.Resource
 import javax.inject.Inject
@@ -22,6 +22,7 @@ class NewsRepositoryImpl @Inject constructor(private val newsInterface: NewsInte
             Resource.Error("No data!", null)
         }
     }
+
 
     override suspend fun searchNews(searchQuery: String): Resource<NewsResponse> {
         return try {
