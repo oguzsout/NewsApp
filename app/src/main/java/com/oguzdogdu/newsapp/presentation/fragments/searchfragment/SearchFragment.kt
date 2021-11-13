@@ -71,6 +71,7 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
             adapter = searchAdapter
             layoutManager = LinearLayoutManager(requireContext())
             setHasFixedSize(true)
+            hideProgressBar()
         }
 
     }
