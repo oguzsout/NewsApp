@@ -13,13 +13,13 @@ class NewsRepositoryImpl @Inject constructor(private val newsInterface: NewsInte
             val response = newsInterface.getAllNews(country, category)
             if (response.isSuccessful) {
                 response.body()?.let {
-                    return@let Resource.Success(it)
-                } ?: Resource.Error("Error", null)
+                    return@let Resource.success(it)
+                } ?: Resource.error("Error", null)
             } else {
-                Resource.Error("Error", null)
+                Resource.error("Error", null)
             }
         } catch (e: Exception) {
-            Resource.Error("No data!", null)
+            Resource.error("No data!", null)
         }
     }
 
@@ -29,13 +29,13 @@ class NewsRepositoryImpl @Inject constructor(private val newsInterface: NewsInte
             val response = newsInterface.searchForNews(searchQuery)
             if (response.isSuccessful) {
                 response.body()?.let {
-                    return@let Resource.Success(it)
-                } ?: Resource.Error("Error", null)
+                    return@let Resource.success(it)
+                } ?: Resource.error("Error", null)
             } else {
-                Resource.Error("Error", null)
+                Resource.error("Error", null)
             }
         } catch (e: Exception) {
-            Resource.Error("No data!", null)
+            Resource.error("No data!", null)
         }
     }
 }

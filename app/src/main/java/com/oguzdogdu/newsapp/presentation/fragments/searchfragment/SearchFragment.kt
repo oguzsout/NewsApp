@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.oguzdogdu.newsapp.R
 import com.oguzdogdu.newsapp.databinding.FragmentSearchBinding
 import com.oguzdogdu.newsapp.presentation.fragments.searchfragment.adapter.SearchAdapter
-import com.oguzdogdu.newsapp.util.Resource
+import com.oguzdogdu.newsapp.util.Status
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -78,8 +78,8 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
 
     private fun observeSearchData() {
         viewModel.newsResponse.observe(viewLifecycleOwner, {
-            when (it) {
-                is Resource.Success -> {
+            when (it.status) {
+                Status.SUCCESS -> {
                     hideProgressBar()
                     it.data.let { newsResponse ->
                         if (newsResponse != null) {
@@ -87,13 +87,13 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
                         }
                     }
                 }
-                is Resource.Error -> {
+                Status.ERROR -> {
                     hideProgressBar()
                     it.message?.let { message ->
                         Log.e("TAG", "An error occured: $message")
                     }
                 }
-                is Resource.Loading -> {
+                Status.LOADING -> {
                     showProgressBar()
                 }
             }

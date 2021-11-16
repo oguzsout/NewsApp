@@ -10,12 +10,11 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.oguzdogdu.newsapp.R
 import com.oguzdogdu.newsapp.databinding.FragmentNewsBinding
 import com.oguzdogdu.newsapp.presentation.fragments.newsfragment.adapter.NewsAdapter
-import com.oguzdogdu.newsapp.util.Resource
+import com.oguzdogdu.newsapp.util.Status.*
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -60,8 +59,8 @@ class NewsFragment : Fragment(R.layout.fragment_news) {
 
     private fun observeData() {
         viewModel.newsResponse.observe(viewLifecycleOwner, {
-            when (it) {
-                is Resource.Success -> {
+            when (it.status) {
+                  SUCCESS  -> {
                     hideProgressBar()
                     it.data.let { newsResponse ->
                         if (newsResponse != null) {
@@ -69,13 +68,13 @@ class NewsFragment : Fragment(R.layout.fragment_news) {
                         }
                     }
                 }
-                is Resource.Error -> {
+                 ERROR -> {
                     hideProgressBar()
                     it.message?.let { message ->
                         Log.e("TAG", "An error occured: $message")
                     }
                 }
-                is Resource.Loading -> {
+                 LOADING -> {
                     showProgressBar()
                 }
             }
@@ -92,7 +91,7 @@ class NewsFragment : Fragment(R.layout.fragment_news) {
         binding.swipeContainer.setColorSchemeColors(Color.RED)
 
         binding.swipeContainer.setOnRefreshListener {
-            newsAdapter.news
+            observeData()
             Toast.makeText(requireContext(), "Refresh From API", Toast.LENGTH_SHORT).show()
             binding.swipeContainer.isRefreshing = false
         }

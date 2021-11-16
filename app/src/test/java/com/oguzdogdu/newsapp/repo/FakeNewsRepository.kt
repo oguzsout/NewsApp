@@ -13,10 +13,10 @@ class FakeNewsRepository : NewsRepository {
 
 
     override suspend fun getNews(country: String, category: String): Resource<NewsResponse> {
-        return Resource.Success(NewsResponse(listOf(), 0))
+        return Resource.success(NewsResponse(listOf(), 0))
     }
 
     override suspend fun searchNews(searchQuery: String): Resource<NewsResponse> {
-        return Resource.Success(NewsResponse(listOf(), 0))
+        return Resource.success(NewsResponse(listOf(), 0))
     }
 }
