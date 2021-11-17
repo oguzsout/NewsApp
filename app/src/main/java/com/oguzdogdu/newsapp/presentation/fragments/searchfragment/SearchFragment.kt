@@ -46,6 +46,16 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
         observeSearchData()
         backStack()
 
+        searchAdapter.setOnItemClickListener {
+            val bundle = Bundle().apply {
+                putParcelable("newsArgs", it)
+            }
+            findNavController().navigate(
+                R.id.action_searchFragment_to_detailFragment,
+                bundle
+            )
+        }
+
     }
 
     private fun searching() {

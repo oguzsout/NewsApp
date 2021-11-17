@@ -43,7 +43,7 @@ class SearchAdapter : RecyclerView.Adapter<SearchAdapter.SearchViewHolder>() {
             )
         )
     }
-
+    private var onItemClickListener: ((Article) -> Unit)? = null
     override fun onBindViewHolder(holder: SearchViewHolder, position: Int) {
 
         val newsList = news[position]
@@ -61,10 +61,17 @@ class SearchAdapter : RecyclerView.Adapter<SearchAdapter.SearchViewHolder>() {
             }
         }
         holder.binding.root.setOnClickListener {
-            val action = SearchFragmentDirections.actionSearchFragmentToDetailFragment(newsList)
+            onItemClickListener?.let {
+                it(newsList)
+            }
+           /* val action = SearchFragmentDirections.actionSearchFragmentToDetailFragment(newsList)
             Navigation.findNavController(it).navigate(action)
+
+            */
         }
     }
-
+    fun setOnItemClickListener(listener: (Article) -> Unit) {
+        onItemClickListener = listener
+    }
     override fun getItemCount() = news.size
 }
