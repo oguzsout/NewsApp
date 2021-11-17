@@ -34,22 +34,25 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
         backStack()
+        bindIncomingData()
+    }
 
-        val news = args.newsArgs
+    private fun bindIncomingData() {
 
-        if (news != null) {
-            binding.description.text = news.description
+        val article = args.newsArgs
+
+        if (article != null) {
+            binding.description.text = article.description
         }
-        if (news != null) {
-            binding.content.text = news.content
+        if (article != null) {
+            binding.content.text = article.content
         }
-        if (news != null) {
-            binding.publish.text = news.publishedAt
+        if (article != null) {
+            binding.publish.text = article.publishedAt
         }
-        if (news != null) {
-            binding.imageListItem.load(news.urlToImage) {
+        if (article != null) {
+            binding.imageListItem.load(article.urlToImage) {
                 crossfade(true)
                 crossfade(500)
                 transformations(RoundedCornersTransformation(25f))
@@ -57,7 +60,7 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
 
         }
         binding.linkButton.setOnClickListener {
-            val action = news?.let { web ->
+            val action = article?.let { web ->
                 DetailFragmentDirections.actionDetailFragmentToWebViewFragment(
                     web
                 )
@@ -66,7 +69,6 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
                 Navigation.findNavController(it).navigate(action)
             }
         }
-
     }
 
     private fun backStack() {

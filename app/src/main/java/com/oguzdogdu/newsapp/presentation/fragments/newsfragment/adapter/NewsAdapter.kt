@@ -44,7 +44,7 @@ class NewsAdapter : RecyclerView.Adapter<NewsAdapter.NewsHolder>(){
             )
         )
     }
-
+    private var onItemClickListener: ((Article) -> Unit)? = null
     override fun onBindViewHolder(holder: NewsHolder, position: Int) {
 
         val newsList = news[position]
@@ -62,10 +62,17 @@ class NewsAdapter : RecyclerView.Adapter<NewsAdapter.NewsHolder>(){
             }
         }
         holder.binding.root.setOnClickListener {
-            val action = NewsFragmentDirections.actionNewsFragmentToDetailFragment(newsList)
+            onItemClickListener?.let {
+                it(newsList)
+            }
+           /* val action = NewsFragmentDirections.actionNewsFragmentToDetailFragment(newsList)
             findNavController(it).navigate(action)
+
+            */
         }
     }
-
+    fun setOnItemClickListener(listener: (Article) -> Unit) {
+        onItemClickListener = listener
+    }
     override fun getItemCount() = news.size
 }

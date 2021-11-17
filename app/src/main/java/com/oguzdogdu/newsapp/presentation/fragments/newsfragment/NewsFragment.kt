@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.oguzdogdu.newsapp.R
 import com.oguzdogdu.newsapp.databinding.FragmentNewsBinding
@@ -45,8 +46,7 @@ class NewsFragment : Fragment(R.layout.fragment_news) {
         setUpRv()
         observeData()
         swipeRefreshData()
-
-
+        sendData()
     }
 
     private fun setUpRv() {
@@ -57,10 +57,22 @@ class NewsFragment : Fragment(R.layout.fragment_news) {
         }
     }
 
+    private fun sendData() {
+        newsAdapter.setOnItemClickListener {
+            val bundle = Bundle().apply {
+                putParcelable("newsArgs", it)
+            }
+            findNavController().navigate(
+                R.id.action_newsFragment_to_detailFragment,
+                bundle
+            )
+        }
+    }
+
     private fun observeData() {
         viewModel.newsResponse.observe(viewLifecycleOwner, {
             when (it.status) {
-                  SUCCESS  -> {
+                SUCCESS -> {
                     hideProgressBar()
                     it.data.let { newsResponse ->
                         if (newsResponse != null) {
@@ -68,13 +80,13 @@ class NewsFragment : Fragment(R.layout.fragment_news) {
                         }
                     }
                 }
-                 ERROR -> {
+                ERROR -> {
                     hideProgressBar()
                     it.message?.let { message ->
                         Log.e("TAG", "An error occured: $message")
                     }
                 }
-                 LOADING -> {
+                LOADING -> {
                     showProgressBar()
                 }
             }
