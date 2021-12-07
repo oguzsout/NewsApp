@@ -2,7 +2,6 @@ package com.oguzdogdu.newsapp.presentation.fragments.newsfragment.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.navigation.Navigation.findNavController
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -11,11 +10,22 @@ import coil.transform.RoundedCornersTransformation
 import com.oguzdogdu.newsapp.R
 import com.oguzdogdu.newsapp.databinding.ListItemBinding
 import com.oguzdogdu.newsapp.domain.model.Article
-import com.oguzdogdu.newsapp.presentation.fragments.newsfragment.NewsFragmentDirections
 
 class NewsAdapter : RecyclerView.Adapter<NewsAdapter.NewsHolder>(){
 
-   inner class NewsHolder(val binding: ListItemBinding) : RecyclerView.ViewHolder(binding.root)
+    inner class NewsHolder(val binding: ListItemBinding) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(article: Article) {
+            binding.apply {
+                textViewListItem.text = article.title
+                val imageLink = article.urlToImage
+                imageListItem.load(imageLink) {
+                    crossfade(true)
+                    crossfade(1000)
+                    transformations(RoundedCornersTransformation(25f))
+                }
+            }
+        }
+    }
 
 
     private val diffUtil = object : DiffUtil.ItemCallback<Article>() {
@@ -48,6 +58,7 @@ class NewsAdapter : RecyclerView.Adapter<NewsAdapter.NewsHolder>(){
     override fun onBindViewHolder(holder: NewsHolder, position: Int) {
 
         val newsList = news[position]
+        holder.bind(newsList)
 
         holder.binding.apply {
             cardView.startAnimation(
@@ -56,10 +67,6 @@ class NewsAdapter : RecyclerView.Adapter<NewsAdapter.NewsHolder>(){
                     R.anim.rv_animation
                 )
             )
-            textViewListItem.text = newsList.title
-            imageListItem.load(newsList.urlToImage) {
-                transformations(RoundedCornersTransformation(25f))
-            }
         }
         holder.binding.root.setOnClickListener {
             onItemClickListener?.let {
