@@ -9,4 +9,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="fragmentColor">#FFFFFF</color>
     <color name="general_color">#006064</color>
+    <color name="grey">#AF9797</color>
 </resources>
