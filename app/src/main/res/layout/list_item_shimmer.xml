@@ -15,9 +15,9 @@
 
         <ImageView
             android:id="@+id/image_list_item"
-            android:background="@color/grey"
             android:layout_width="@dimen/item_image_width"
             android:layout_height="@dimen/image_di"
+            android:background="@color/grey"
             android:contentDescription="@string/news_photo"
             android:scaleType="centerCrop">
         </ImageView>
@@ -27,10 +27,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginStart="10dp"
             android:background="@color/grey"
             android:fontFamily="@font/product_sans_medium"
             android:padding="10dp"
-            android:layout_marginStart="10dp"
             android:text="@string/news_title"
             android:textColor="@color/grey"
             android:textSize="16sp">

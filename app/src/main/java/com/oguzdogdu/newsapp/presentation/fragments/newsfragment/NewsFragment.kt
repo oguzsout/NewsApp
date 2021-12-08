@@ -73,21 +73,25 @@ class NewsFragment : Fragment(R.layout.fragment_news) {
         viewModel.newsResponse.observe(viewLifecycleOwner, {
             when (it.status) {
                 SUCCESS -> {
-                    hideProgressBar()
+                    //hideProgressBar()
                     it.data.let { newsResponse ->
                         if (newsResponse != null) {
                             newsAdapter.news = newsResponse.articles
+                            binding.shimmer.stopShimmer()
+                            binding.shimmer.visibility = View.GONE
                         }
                     }
                 }
                 ERROR -> {
-                    hideProgressBar()
+                    binding.shimmer.visibility = View.GONE
+                   // hideProgressBar()
                     it.message?.let { message ->
                         Log.e("TAG", "An error occured: $message")
                     }
                 }
                 LOADING -> {
-                    showProgressBar()
+                    binding.shimmer.startShimmer()
+                   // showProgressBar()
                 }
             }
         })
@@ -109,13 +113,15 @@ class NewsFragment : Fragment(R.layout.fragment_news) {
         }
     }
 
-    private fun hideProgressBar() {
+  /*  private fun hideProgressBar() {
         binding.progressBar.visibility = View.INVISIBLE
     }
 
     private fun showProgressBar() {
         binding.progressBar.visibility = View.VISIBLE
     }
+
+   */
 
     override fun onDestroyView() {
         super.onDestroyView()
