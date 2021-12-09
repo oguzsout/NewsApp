@@ -1,8 +1,10 @@
 # NewsApp
-NewsApp is a sample news app built using Modern Android Development (Architecture Components, MVVM, Kotlin, Coroutines, Retrofit, Navigation, Dagger-Hilt and Clean Architecture)
+NewsApp is a sample news app built using Modern Android Development (Architecture Components, MVVM, Kotlin, Coroutines, Retrofit, Navigation, Dagger-Hilt and Clean Architecture).
+
 NewsApp is simple App which uses [NewsAPI](https://newsapi.org/) to get top headlines for country you live in or you can search for a specific news.
 
 ## Architecture
+
 This app uses [***MVVM (Model View View-Model)***](https://developer.android.com/jetpack/docs/guide#recommended-app-arch) architecture.
 
 ![Architecture](https://github.com/Naveentp/Clean-MVVM-NewsApp/blob/master/ART/clean_mvvm.jpeg)
@@ -12,7 +14,7 @@ This app uses [***MVVM (Model View View-Model)***](https://developer.android.com
 - Add the generated API key in `app/build.gradle` like below  
   Util/Constants, '"API_KEY"'`
 - Build and run the app.
-- 
+
 ## Screenshots
 
 <p align="center">
