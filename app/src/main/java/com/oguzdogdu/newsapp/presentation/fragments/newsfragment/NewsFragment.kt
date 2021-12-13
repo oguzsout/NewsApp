@@ -3,43 +3,27 @@ package com.oguzdogdu.newsapp.presentation.fragments.newsfragment
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.oguzdogdu.newsapp.R
 import com.oguzdogdu.newsapp.databinding.FragmentNewsBinding
+import com.oguzdogdu.newsapp.presentation.fragments.base.BaseFragment
 import com.oguzdogdu.newsapp.presentation.fragments.newsfragment.adapter.NewsAdapter
 import com.oguzdogdu.newsapp.util.Status.*
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class NewsFragment : Fragment(R.layout.fragment_news) {
-
-    private var _binding: FragmentNewsBinding? = null
-    private val binding get() = _binding!!
+class NewsFragment : BaseFragment<FragmentNewsBinding>(FragmentNewsBinding::inflate) {
 
     @Inject
     lateinit var newsAdapter: NewsAdapter
 
     private val viewModel: NewsViewModel by viewModels()
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentNewsBinding.inflate(
-            inflater, container, false
-        )
-        return binding.root
-
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -73,12 +57,13 @@ class NewsFragment : Fragment(R.layout.fragment_news) {
         viewModel.newsResponse.observe(viewLifecycleOwner, {
             when (it.status) {
                 SUCCESS -> {
+                    binding.shimmer.stopShimmer()
+                    binding.shimmer.visibility = View.GONE
                     //hideProgressBar()
                     it.data.let { newsResponse ->
                         if (newsResponse != null) {
                             newsAdapter.news = newsResponse.articles
-                            binding.shimmer.stopShimmer()
-                            binding.shimmer.visibility = View.GONE
+
                         }
                     }
                 }
@@ -122,9 +107,4 @@ class NewsFragment : Fragment(R.layout.fragment_news) {
     }
 
    */
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
 }
