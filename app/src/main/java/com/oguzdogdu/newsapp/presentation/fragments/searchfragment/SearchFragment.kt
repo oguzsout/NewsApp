@@ -2,42 +2,25 @@ package com.oguzdogdu.newsapp.presentation.fragments.searchfragment
 
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.widget.SearchView
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.oguzdogdu.newsapp.R
 import com.oguzdogdu.newsapp.databinding.FragmentSearchBinding
+import com.oguzdogdu.newsapp.presentation.fragments.base.BaseFragment
 import com.oguzdogdu.newsapp.presentation.fragments.searchfragment.adapter.SearchAdapter
 import com.oguzdogdu.newsapp.util.Status
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class SearchFragment : Fragment(R.layout.fragment_search) {
+class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding::inflate) {
 
-    private var _binding: FragmentSearchBinding? = null
-    private val binding get() = _binding!!
-
-
-    private var searchAdapter = SearchAdapter()
-
+    private lateinit var searchAdapter: SearchAdapter
 
     private val viewModel: SearchViewModel by viewModels()
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentSearchBinding.inflate(
-            inflater, container, false
-        )
-        return binding.root
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -72,7 +55,6 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
             override fun onQueryTextChange(newText: String?): Boolean {
                 return false
             }
-
         })
     }
 
@@ -83,7 +65,6 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
             setHasFixedSize(true)
             hideProgressBar()
         }
-
     }
 
     private fun observeSearchData() {
@@ -127,11 +108,5 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
     private fun showProgressBar() {
         binding.progressBarSearch.visibility = View.VISIBLE
     }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
-
 }
 
