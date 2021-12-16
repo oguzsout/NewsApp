@@ -18,7 +18,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding::inflate) {
 
-    private lateinit var searchAdapter: SearchAdapter
+    private var searchAdapter = SearchAdapter()
 
     private val viewModel: SearchViewModel by viewModels()
 

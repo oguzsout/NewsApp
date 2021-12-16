@@ -15,13 +15,11 @@ import com.oguzdogdu.newsapp.presentation.fragments.base.BaseFragment
 import com.oguzdogdu.newsapp.presentation.fragments.newsfragment.adapter.NewsAdapter
 import com.oguzdogdu.newsapp.util.Status.*
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class NewsFragment : BaseFragment<FragmentNewsBinding>(FragmentNewsBinding::inflate) {
 
-    @Inject
-    lateinit var newsAdapter: NewsAdapter
+   private var newsAdapter = NewsAdapter()
 
     private val viewModel: NewsViewModel by viewModels()
 
@@ -55,6 +53,7 @@ class NewsFragment : BaseFragment<FragmentNewsBinding>(FragmentNewsBinding::infl
 
     private fun observeData() {
         viewModel.newsResponse.observe(viewLifecycleOwner, {
+
             when (it.status) {
                 SUCCESS -> {
                     binding.shimmer.stopShimmer()
