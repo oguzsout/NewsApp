@@ -31,7 +31,7 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>(FragmentDetailBinding
             binding.txtDescription.text = article.description
         }
         if (article != null) {
-            binding.txtContent.text = article.content.parseAsHtml()
+            binding.txtContent.text = article.content
         }
         if (article != null) {
             binding.txtPublish.text = article.publishedAt
