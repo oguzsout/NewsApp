@@ -28,10 +28,8 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/barTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/product_sans_bold"
             android:text="@string/app_name"
             android:textColor="@color/general_color"
             android:textSize="24sp"
@@ -43,6 +41,7 @@
         </TextView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigation"
         android:layout_width="match_parent"

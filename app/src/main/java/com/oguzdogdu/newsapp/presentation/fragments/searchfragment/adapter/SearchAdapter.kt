@@ -2,7 +2,6 @@ package com.oguzdogdu.newsapp.presentation.fragments.searchfragment.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.navigation.Navigation
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -11,7 +10,6 @@ import coil.transform.RoundedCornersTransformation
 import com.oguzdogdu.newsapp.R
 import com.oguzdogdu.newsapp.databinding.ListItemSearchBinding
 import com.oguzdogdu.newsapp.domain.model.Article
-import com.oguzdogdu.newsapp.presentation.fragments.searchfragment.SearchFragmentDirections
 
 class SearchAdapter : RecyclerView.Adapter<SearchAdapter.SearchViewHolder>() {
     inner class SearchViewHolder(val binding: ListItemSearchBinding) : RecyclerView.ViewHolder(binding.root)
@@ -49,14 +47,14 @@ class SearchAdapter : RecyclerView.Adapter<SearchAdapter.SearchViewHolder>() {
         val newsList = news[position]
 
         holder.binding.apply {
-            cardView.startAnimation(
+            cardSearch.startAnimation(
                 android.view.animation.AnimationUtils.loadAnimation(
                     holder.itemView.context,
                     R.anim.rv_animation
                 )
             )
-            textViewListItem.text = newsList.title
-            imageListItem.load(newsList.urlToImage) {
+            txtSearchTitle.text = newsList.title
+            imgSearch.load(newsList.urlToImage) {
                 transformations(RoundedCornersTransformation(25f))
             }
         }

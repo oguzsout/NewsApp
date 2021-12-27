@@ -16,9 +16,9 @@ class NewsAdapter : RecyclerView.Adapter<NewsAdapter.NewsHolder>(){
     inner class NewsHolder(val binding: ListItemBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(article: Article) {
             binding.apply {
-                textViewListItem.text = article.title
+                txtTitle.text = article.title
                 val imageLink = article.urlToImage
-                imageListItem.load(imageLink) {
+                imgNews.load(imageLink) {
                     crossfade(true)
                     crossfade(1000)
                     transformations(RoundedCornersTransformation(25f))
@@ -61,7 +61,7 @@ class NewsAdapter : RecyclerView.Adapter<NewsAdapter.NewsHolder>(){
         holder.bind(newsList)
 
         holder.binding.apply {
-            cardView.startAnimation(
+            cardNews.startAnimation(
                 android.view.animation.AnimationUtils.loadAnimation(
                     holder.itemView.context,
                     R.anim.rv_animation

@@ -24,7 +24,7 @@ class NewsViewModel @Inject constructor(private val repository: NewsRepository) 
         getBreakingNews()
     }
 
-     private fun getBreakingNews() {
+    private fun getBreakingNews() {
         viewModelScope.launch(Dispatchers.IO) {
             val result = repository.getNews(country = "tr", category = "business")
             delay(1000)

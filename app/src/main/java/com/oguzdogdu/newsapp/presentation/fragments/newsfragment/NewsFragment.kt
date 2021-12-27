@@ -32,7 +32,7 @@ class NewsFragment : BaseFragment<FragmentNewsBinding>(FragmentNewsBinding::infl
     }
 
     private fun setUpRv() {
-        binding.recyclerView.apply {
+        binding.recyclerviewList.apply {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = newsAdapter
             setHasFixedSize(true)
@@ -82,18 +82,18 @@ class NewsFragment : BaseFragment<FragmentNewsBinding>(FragmentNewsBinding::infl
     }
 
     private fun swipeRefreshData() {
-        binding.swipeContainer.setProgressBackgroundColorSchemeColor(
+        binding.swipe.setProgressBackgroundColorSchemeColor(
             ContextCompat.getColor(
                 requireContext(),
                 R.color.white
             )
         )
-        binding.swipeContainer.setColorSchemeColors(Color.RED)
+        binding.swipe.setColorSchemeColors(Color.RED)
 
-        binding.swipeContainer.setOnRefreshListener {
+        binding.swipe.setOnRefreshListener {
             observeData()
             Toast.makeText(requireContext(), "Refresh From API", Toast.LENGTH_SHORT).show()
-            binding.swipeContainer.isRefreshing = false
+            binding.swipe.isRefreshing = false
         }
     }
 

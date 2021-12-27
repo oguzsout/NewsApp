@@ -34,7 +34,7 @@
         app:layout_constraintTop_toBottomOf="@+id/searchView" />
 
     <ProgressBar
-        android:id="@+id/progressBarSearch"
+        android:id="@+id/progress"
         style="?android:attr/progressBarStyleInverse"
         android:indeterminateTint="@color/general_color"
         android:layout_width="wrap_content"

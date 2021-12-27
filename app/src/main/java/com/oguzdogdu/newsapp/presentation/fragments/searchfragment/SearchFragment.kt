@@ -102,11 +102,11 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
     }
 
     private fun hideProgressBar() {
-        binding.progressBarSearch.visibility = View.INVISIBLE
+        binding.progress.visibility = View.INVISIBLE
     }
 
     private fun showProgressBar() {
-        binding.progressBarSearch.visibility = View.VISIBLE
+        binding.progress.visibility = View.VISIBLE
     }
 }
 

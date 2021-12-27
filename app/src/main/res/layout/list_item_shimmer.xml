@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/cardView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="10dp"
@@ -14,7 +13,6 @@
         android:orientation="horizontal">
 
         <ImageView
-            android:id="@+id/image_list_item"
             android:layout_width="@dimen/item_image_width"
             android:layout_height="@dimen/image_di"
             android:background="@color/grey"
@@ -23,13 +21,11 @@
         </ImageView>
 
         <TextView
-            android:id="@+id/text_view_list_item"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginStart="10dp"
             android:background="@color/grey"
-            android:fontFamily="@font/product_sans_medium"
             android:padding="10dp"
             android:text="@string/news_title"
             android:textColor="@color/grey"

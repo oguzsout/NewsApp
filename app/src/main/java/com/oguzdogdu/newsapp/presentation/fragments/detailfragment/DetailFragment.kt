@@ -3,6 +3,7 @@ package com.oguzdogdu.newsapp.presentation.fragments.detailfragment
 import android.os.Bundle
 import android.view.View
 import androidx.activity.OnBackPressedCallback
+import androidx.core.text.parseAsHtml
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -27,23 +28,22 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>(FragmentDetailBinding
         val article = args.newsArgs
 
         if (article != null) {
-            binding.description.text = article.description
+            binding.txtDescription.text = article.description
         }
         if (article != null) {
-            binding.content.text = article.content
+            binding.txtContent.text = article.content.parseAsHtml()
         }
         if (article != null) {
-            binding.publish.text = article.publishedAt
+            binding.txtPublish.text = article.publishedAt
         }
         if (article != null) {
-            binding.imageListItem.load(article.urlToImage) {
+            binding.imgNews.load(article.urlToImage) {
                 crossfade(true)
                 crossfade(500)
                 transformations(RoundedCornersTransformation(25f))
             }
-
         }
-        binding.linkButton.setOnClickListener {
+        binding.btnRead.setOnClickListener {
             val action = article?.let { web ->
                 DetailFragmentDirections.actionDetailFragmentToWebViewFragment(
                     web
@@ -61,7 +61,6 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>(FragmentDetailBinding
                 findNavController().popBackStack()
             }
         }
-
         requireActivity().onBackPressedDispatcher.addCallback(callBack)
     }
 }

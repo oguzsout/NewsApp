@@ -31,9 +31,9 @@ class WebViewFragment : BaseFragment<FragmentWebViewBinding>(FragmentWebViewBind
     }
 
     private fun webViewSetup() {
-        binding.webSiteView.webViewClient = WebViewClient()
+        binding.webview.webViewClient = WebViewClient()
 
-        binding.webSiteView.apply {
+        binding.webview.apply {
             settings.loadWithOverviewMode = true
             settings.useWideViewPort = true
             loadUrl(args.webArgs.url)
