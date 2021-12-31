@@ -18,10 +18,8 @@
             app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_newsFragment_to_searchFragment"
-            app:destination="@id/searchFragment" />
-        <action
-            android:id="@+id/action_newsFragment_to_searchFragment22"
-            app:destination="@id/searchFragment" />
+            app:destination="@id/searchFragment"
+            />
     </fragment>
     <fragment
         android:id="@+id/detailFragment"
@@ -36,6 +34,8 @@
         <action
             android:id="@+id/action_detailFragment_to_webViewFragment"
             app:destination="@id/webViewFragment"
+            app:popUpTo="@+id/detailFragment"
+            app:popUpToInclusive="true"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
@@ -54,6 +54,8 @@
             app:argType="com.oguzdogdu.newsapp.domain.model.Article" />
         <action
             android:id="@+id/action_webViewFragment_to_detailFragment"
+            app:popUpTo="@+id/webViewFragment"
+            app:popUpToInclusive="true"
             app:destination="@id/detailFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"

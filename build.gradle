@@ -3,7 +3,7 @@ buildscript {
     ext.kotlin_version = "1.6.10"
     ext.hilt_version = '2.40'
     ext.retrofit_version = '2.9.0'
-    ext.nav_version = '2.3.5'
+    ext.nav_version = '2.4.0-rc01'
     repositories {
         google()
         mavenCentral()
