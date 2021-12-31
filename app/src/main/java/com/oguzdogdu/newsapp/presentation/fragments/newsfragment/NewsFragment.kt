@@ -7,8 +7,8 @@ import android.view.View
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.oguzdogdu.newsapp.R
 import com.oguzdogdu.newsapp.databinding.FragmentNewsBinding
 import com.oguzdogdu.newsapp.presentation.fragments.base.BaseFragment
@@ -28,29 +28,16 @@ class NewsFragment : BaseFragment<FragmentNewsBinding>(FragmentNewsBinding::infl
         setUpRv()
         observeData()
         swipeRefreshData()
-        sendData()
     }
 
     private fun setUpRv() {
         binding.recyclerviewList.apply {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = newsAdapter
+            setRecycledViewPool(RecyclerView.RecycledViewPool())
             setHasFixedSize(true)
         }
     }
-
-    private fun sendData() {
-        newsAdapter.setOnItemClickListener {
-            val bundle = Bundle().apply {
-                putParcelable("newsArgs", it)
-            }
-            findNavController().navigate(
-                R.id.action_newsFragment_to_detailFragment,
-                bundle
-            )
-        }
-    }
-
     private fun observeData() {
         viewModel.newsResponse.observe(viewLifecycleOwner, {
 
@@ -58,24 +45,20 @@ class NewsFragment : BaseFragment<FragmentNewsBinding>(FragmentNewsBinding::infl
                 SUCCESS -> {
                     binding.shimmer.stopShimmer()
                     binding.shimmer.visibility = View.GONE
-                    //hideProgressBar()
-                    it.data.let { newsResponse ->
-                        if (newsResponse != null) {
-                            newsAdapter.news = newsResponse.articles
-
+                    it.data.let { response ->
+                        if (response != null) {
+                            newsAdapter.news = response.articles
                         }
                     }
                 }
                 ERROR -> {
                     binding.shimmer.visibility = View.GONE
-                   // hideProgressBar()
                     it.message?.let { message ->
                         Log.e("TAG", "An error occured: $message")
                     }
                 }
                 LOADING -> {
                     binding.shimmer.startShimmer()
-                   // showProgressBar()
                 }
             }
         })
@@ -96,7 +79,6 @@ class NewsFragment : BaseFragment<FragmentNewsBinding>(FragmentNewsBinding::infl
             binding.swipe.isRefreshing = false
         }
     }
-
   /*  private fun hideProgressBar() {
         binding.progressBar.visibility = View.INVISIBLE
     }
@@ -104,6 +86,5 @@ class NewsFragment : BaseFragment<FragmentNewsBinding>(FragmentNewsBinding::infl
     private fun showProgressBar() {
         binding.progressBar.visibility = View.VISIBLE
     }
-
    */
 }
