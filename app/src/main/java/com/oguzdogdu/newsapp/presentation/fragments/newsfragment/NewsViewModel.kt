@@ -9,7 +9,6 @@ import com.oguzdogdu.newsapp.domain.repository.NewsRepository
 import com.oguzdogdu.newsapp.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -27,7 +26,6 @@ class NewsViewModel @Inject constructor(private val repository: NewsRepository) 
     private fun getBreakingNews() {
         viewModelScope.launch(Dispatchers.IO) {
             val result = repository.getNews(country = "tr", category = "business")
-            delay(1000)
             _response.postValue(result)
         }
     }
