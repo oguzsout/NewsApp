@@ -12,7 +12,8 @@ import com.oguzdogdu.newsapp.R
 import com.oguzdogdu.newsapp.databinding.FragmentSearchBinding
 import com.oguzdogdu.newsapp.presentation.fragments.base.BaseFragment
 import com.oguzdogdu.newsapp.presentation.fragments.searchfragment.adapter.SearchAdapter
-import com.oguzdogdu.newsapp.util.Status
+import com.oguzdogdu.newsapp.util.Resource
+
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -68,23 +69,23 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
     }
 
     private fun observeSearchData() {
-        viewModel.newsResponse.observe(viewLifecycleOwner, {
-            when (it.status) {
-                Status.SUCCESS -> {
+        viewModel.newsResponse.observe(viewLifecycleOwner, { result ->
+            when (result) {
+                is Resource.Success -> {
                     hideProgressBar()
-                    it.data.let { newsResponse ->
-                        if (newsResponse != null) {
-                            searchAdapter.news = newsResponse.articles
+                    result.data?.articles.also {
+                        if (it != null) {
+                            searchAdapter.news = it
                         }
                     }
                 }
-                Status.ERROR -> {
+                is Resource.Error -> {
                     hideProgressBar()
-                    it.message?.let { message ->
+                    result.message?.let { message ->
                         Log.e("TAG", "An error occured: $message")
                     }
                 }
-                Status.LOADING -> {
+                is Resource.Loading -> {
                     showProgressBar()
                 }
             }
