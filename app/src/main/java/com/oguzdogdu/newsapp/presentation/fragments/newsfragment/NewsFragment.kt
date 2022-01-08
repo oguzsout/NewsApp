@@ -13,7 +13,7 @@ import com.oguzdogdu.newsapp.R
 import com.oguzdogdu.newsapp.databinding.FragmentNewsBinding
 import com.oguzdogdu.newsapp.presentation.fragments.base.BaseFragment
 import com.oguzdogdu.newsapp.presentation.fragments.newsfragment.adapter.NewsAdapter
-import com.oguzdogdu.newsapp.util.Status.*
+import com.oguzdogdu.newsapp.util.Resource
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -25,12 +25,12 @@ class NewsFragment : BaseFragment<FragmentNewsBinding>(FragmentNewsBinding::infl
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setUpRv()
+        setUpRecyclerView()
         observeData()
         swipeRefreshData()
     }
 
-    private fun setUpRv() {
+    private fun setUpRecyclerView() {
         binding.recyclerviewList.apply {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = newsAdapter
@@ -39,26 +39,25 @@ class NewsFragment : BaseFragment<FragmentNewsBinding>(FragmentNewsBinding::infl
         }
     }
     private fun observeData() {
-        viewModel.newsResponse.observe(viewLifecycleOwner, {
+        viewModel.newsResponse.observe(viewLifecycleOwner, { result ->
 
-            when (it.status) {
-                SUCCESS -> {
-                    binding.shimmer.stopShimmer()
-                    binding.shimmer.visibility = View.GONE
-                    it.data.let { response ->
-                        if (response != null) {
-                            newsAdapter.news = response.articles
+            when (result) {
+                is Resource.Success -> {
+                    hideShimmerEffect()
+                    result.data?.articles.also {
+                        if (it != null) {
+                            newsAdapter.news = it
                         }
                     }
                 }
-                ERROR -> {
-                    binding.shimmer.visibility = View.GONE
-                    it.message?.let { message ->
+                is Resource.Error -> {
+                    hideShimmerEffect()
+                    result.message?.let { message ->
                         Log.e("TAG", "An error occured: $message")
                     }
                 }
-                LOADING -> {
-                    binding.shimmer.startShimmer()
+                is Resource.Loading -> {
+                    showShimmerEffect()
                 }
             }
         })
@@ -79,12 +78,16 @@ class NewsFragment : BaseFragment<FragmentNewsBinding>(FragmentNewsBinding::infl
             binding.swipe.isRefreshing = false
         }
     }
-  /*  private fun hideProgressBar() {
-        binding.progressBar.visibility = View.INVISIBLE
+
+    private fun showShimmerEffect() {
+        binding.shimmer.startShimmer()
+        binding.shimmer.visibility = View.VISIBLE
+        binding.recyclerviewList.visibility = View.GONE
     }
 
-    private fun showProgressBar() {
-        binding.progressBar.visibility = View.VISIBLE
+    private fun hideShimmerEffect() {
+        binding.shimmer.stopShimmer()
+        binding.shimmer.visibility = View.GONE
+        binding.recyclerviewList.visibility = View.VISIBLE
     }
-   */
 }
